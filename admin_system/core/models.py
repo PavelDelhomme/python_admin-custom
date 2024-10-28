@@ -1,5 +1,4 @@
 from datetime import datetime
-import json
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -45,7 +44,13 @@ class VersionedModel(models.Model):
         for field in self._meta.fields:
             value = getattr(self, field.name)
             if isinstance(value, datetime):
-                data[field.name] = value.isoformat()  # Convertir les objets datetime en ISO 8601
+                data[field.name] = value.isoformat()  # Convertir en ISO 8601 pour les objets datetime
+            elif isinstance(value, models.FileField) or isinstance(value, models.ImageField):
+                # Assurez-vous que le champ a un fichier avant d'accéder à l'URL
+                if value and hasattr(value, 'url'):
+                    data[field.name] = value.url
+                else:
+                    data[field.name] = None  # Si aucun fichier n'est associé, enregistrez None
             elif hasattr(value, 'pk'):  # Pour les ForeignKey, OneToOneField, etc.
                 data[field.name] = value.pk  # Stocker uniquement la clé primaire
             else:
@@ -70,7 +75,6 @@ class UserProfile(VersionedModel, models.Model):
     bio = models.TextField(blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username}'s profile"

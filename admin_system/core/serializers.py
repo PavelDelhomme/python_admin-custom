@@ -71,7 +71,7 @@ class EmailChangeSerializer(serializers.Serializer):
 class UserProfileSerializer(serializers.ModelSerializer):
    class Meta:
        model = UserProfile
-       fields = ['bio', 'location', 'birth_date', 'profile_picture']
+       fields = ['bio', 'location', 'birth_date']
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
