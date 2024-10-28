@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Création du super utilisateur fonctionnel">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/core/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/db.sqlite3" afterDir="false" />
-    </list>
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Ajout de la fouronttionnalite de certainne cose non fonctionnelle" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,12 +62,21 @@
       <option name="project" value="LOCAL" />
       <updated>1730127013442</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Ajout de la fouronttionnalite de certainne cose non fonctionnelle">
+      <option name="closed" value="true" />
+      <created>1730145887476</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730145887476</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit" />
     <MESSAGE value="Création du super utilisateur fonctionnel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création du super utilisateur fonctionnel" />
+    <MESSAGE value="Ajout de la fouronttionnalite de certainne cose non fonctionnelle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de la fouronttionnalite de certainne cose non fonctionnelle" />
   </component>
 </project>
