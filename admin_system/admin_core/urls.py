@@ -4,12 +4,12 @@ from .views import GenericModelViewSet, ProjectSettingView
 
 
 router = DefaultRouter()
-router.register(r'<str:model>/', GenericModelViewSet, basename='model')
+router.register(r'models/(?p<model>[^/.]+)', GenericModelViewSet, basename='model')
 
 
 urlpatterns = [
    path('api/admin/', include(router.urls)),
-   path('settings/', ProjectSettingView.as_view(), name='project-settings'),
+   path('api/admin/settings/', ProjectSettingView.as_view(), name='project-settings'),
 ]
 
 

@@ -48,7 +48,7 @@ class EmailChangeView(generics.UpdateAPIView):
 class CustomUserViewSet(viewsets.ModelViewSet):
    queryset = CustomUser.objects.all()
    serializer_class = CustomUserSerializer
-   permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+   permission_classes = [IsAuthenticated, IsAdminUser]
 
 
    @action(detail=True, methods=['post'])
