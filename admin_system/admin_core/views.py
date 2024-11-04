@@ -12,8 +12,10 @@ from core.models import CustomUser
 from .models import CustomChart
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import UserEditForm
+from .forms import UserEditForm, UserGroupForm
+
 
 @staff_member_required
 def dashboard_view(request):
@@ -91,6 +93,16 @@ def user_management_view(request):
     context = {'users': users}
     return render(request, 'admin_core/user_management.html', context)
 
+
+@staff_member_required
+def user_detail_view(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    groups = user.groups.all()
+    return render(request, 'admin_core/user_detail.html', {
+        'user': user,
+        'groups': groups,
+    })
+
 @login_required
 def edit_user_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
@@ -103,3 +115,28 @@ def edit_user_view(request, user_id):
         form = UserEditForm(instance=user)
     context = {'form': form, 'user': user}
     return render(request, 'admin_core/edit_user.html', context)
+
+@staff_member_required
+def edit_user_groups(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    if request.method == 'POST':
+        form = UserGroupForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user_management')
+    else:
+        form = UserGroupForm(instance=user)
+    return render(request, 'admin_core/edit_user_groups.html', {'form': form, 'user': user})
+
+
+@staff_member_required
+def reset_user_password(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    if request.method == 'POST':
+        form = PasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('user_management')
+    else:
+        form = PasswordChangeForm(user)
+    return render(request, 'admin_core/reset_password.html', {'form': form, 'user': user})

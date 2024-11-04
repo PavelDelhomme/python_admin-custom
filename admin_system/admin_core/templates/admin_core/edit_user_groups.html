@@ -1,0 +1,9 @@
+{% extends "admin_core/base_admin.html" %}
+{% block title %}Edit {{ user.username }}{% endblock %}
+{% block content %}<h2>Modifier les Groupes pour {{ user.username }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer les changements</button>
+</form>
+{% endblock %}
