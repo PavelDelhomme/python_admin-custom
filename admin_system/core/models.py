@@ -30,12 +30,29 @@ class VersionedModel(models.Model):
     def save(self, *args, **kwargs):
         if self.pk:
             self.version += 1
-            # Convertir les champs en un dictionnaire JSON-compatible
+
+            # Vérifiez si la version existe déjà dans `VersionHistory`
+            exists = VersionHistory.objects.filter(
+                content_type=self.__class__.__name__,
+                object_id=self.pk,
+                version=self.version
+            ).exists()
+
+            # Incrémentez la version jusqu'à ce qu'elle soit unique
+            while exists:
+                self.version += 1
+                exists = VersionHistory.objects.filter(
+                    content_type=self.__class__.__name__,
+                    object_id=self.pk,
+                    version=self.version
+                ).exists()
+
+            # Créer une nouvelle entrée de `VersionHistory`
             VersionHistory.objects.create(
                 content_type=self.__class__.__name__,
                 object_id=self.pk,
                 version=self.version,
-                data=self.to_dict()  # Utilise la méthode to_dict pour garantir la compatibilité JSON
+                data=self.to_dict()
             )
         super().save(*args, **kwargs)
 

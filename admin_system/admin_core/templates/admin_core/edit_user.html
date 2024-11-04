@@ -1,0 +1,15 @@
+<!-- admin_core/templates/admin_core/edit_user.html -->
+
+{% extends "admin_core/base_admin.html" %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+<h1>Edit User: {{ user.username }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save changes</button>
+</form>
+{% endblock %}

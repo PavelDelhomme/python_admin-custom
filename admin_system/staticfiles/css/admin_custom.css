@@ -1,0 +1,84 @@
+/* admin_custom.css */
+
+/* Style global pour le corps de la page */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Style pour la barre de navigation */
+.navbar {
+    background-color: #343a40; /* Couleur sombre */
+}
+
+.navbar-brand,
+.nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #adb5bd !important; /* Gris clair sur survol */
+}
+
+/* Style pour le conteneur principal */
+.container {
+    padding-top: 20px;
+}
+
+/* Style pour les titres */
+h1, h3 {
+    color: #343a40;
+}
+
+/* Style pour les cartes d'information */
+.card {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Style pour les boutons */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Style des graphiques */
+#roleChart {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style pour la liste des utilisateurs récents */
+.recent-users {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recent-users li {
+    padding: 8px 0;
+    color: #555;
+}
+
+.recent-users li:hover {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+/* Style des éléments de texte importants */
+.lead {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+}

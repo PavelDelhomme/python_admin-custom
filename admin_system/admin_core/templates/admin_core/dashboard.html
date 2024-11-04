@@ -1,0 +1,43 @@
+<!-- admin_core/templates/admin_core/dashboard.html -->
+{% extends "admin_core/base_admin.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Total Users</h3>
+        <p>{{ user_count }}</p>
+    </div>
+    <div class="col-md-6">
+        <h3>Recent Users</h3>
+        <ul>
+            {% for user in recent_users %}
+                <li>{{ user.username }} - {{ user.date_joined }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h3>User Roles</h3>
+        <canvas id="roleChart"></canvas>
+    </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script>
+    const ctx = document.getElementById('roleChart').getContext('2d');
+    const dataLabels = {{ dataLabels|safe }};
+    const dataValues = {{ dataValues|safe }};
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: dataLabels,
+            datasets: [{
+                data: dataValues,
+                backgroundColor: ['#3498db', '#e74c3c', '#9b59b6', '#2ecc71'],
+            }]
+        },
+    });
+</script>
+{% endblock %}
