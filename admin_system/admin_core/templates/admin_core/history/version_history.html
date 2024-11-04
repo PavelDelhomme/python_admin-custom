@@ -1,0 +1,26 @@
+{% extends "admin_core/base/base_admin.html" %}
+
+{% block title %}Version History{% endblock %}
+
+{% block content %}
+<h1>Version History for {{ model_name }} (ID: {{ object_id }})</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Version</th>
+            <th>Modified At</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for version in versions %}
+        <tr>
+            <td>{{ version.version }}</td>
+            <td>{{ version.modified_at }}</td>
+            <td><pre>{{ version.data|safe }}</pre></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

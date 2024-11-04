@@ -4,13 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Ajout de la fonctionnalité de gestion des utilisateur et groupe et d'une interface d'administration customisable">
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0002_customchart.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/edit_user_groups.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/reset_password.html" afterDir="false" />
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Gestion des utilisateur pour le moment en cours">
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0003_setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0004_customchart_last_modified_customchart_version_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0005_setting_description_alter_setting_value.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/groups/group_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/groups/group_management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/history/version_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/login/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/field_visibility.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/general_settings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_logs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_permissions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_tokens.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/settings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templatetags/custom_filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/core/migrations/0003_versionhistory_user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/base_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/dashboard/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/edit_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/edit_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/edit_user_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/edit_user_groups.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/manage_charts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/reset_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/user_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/core/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +50,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -68,7 +97,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core" />
+      <recent name="$PROJECT_DIR$/admin_system" />
+      <recent name="$PROJECT_DIR$/admin_system/admin_system" />
+      <recent name="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings" />
+      <recent name="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/login" />
+      <recent name="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/groups" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -112,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730727364847</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Gestion des utilisateur pour le moment en cours">
+      <option name="closed" value="true" />
+      <created>1730727990066</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730727990066</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -121,6 +162,7 @@
     <MESSAGE value="Création du super utilisateur fonctionnel" />
     <MESSAGE value="Ajout de la fouronttionnalite de certainne cose non fonctionnelle" />
     <MESSAGE value="Ajout de la fonctionnalité de gestion des utilisateur et groupe et d'une interface d'administration customisable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de la fonctionnalité de gestion des utilisateur et groupe et d'une interface d'administration customisable" />
+    <MESSAGE value="Gestion des utilisateur pour le moment en cours" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gestion des utilisateur pour le moment en cours" />
   </component>
 </project>

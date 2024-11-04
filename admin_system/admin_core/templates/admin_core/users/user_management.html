@@ -1,0 +1,47 @@
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+{% load custom_filters %}
+
+<h1>Manage Users</h1>
+
+<form method="post" action="{% url 'bulk_user_action' %}" id="userForm">
+    {% csrf_token %}
+    <table class="table">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="selectAll"></th>
+            {% for field in fields_to_display %}
+            <th>{{ field.verbose_name }}</th>
+            {% endfor %}
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td><input type="checkbox" name="selected_users" value="{{ user.id }}"></td>
+            {% for field in fields_to_display %}
+            <td>{{ user|get_attr:field.name|default:"N/A" }}</td>
+            {% endfor %}
+            <td><a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-primary">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <button type="submit" name="action" value="delete" class="btn btn-danger">Delete Selected</button>
+    <button type="submit" name="action" value="add_to_group" class="btn btn-info">Add to Group</button>
+    <select name="group_id" class="form-control d-inline w-auto">
+        {% for group in groups %}
+        <option value="{{ group.id }}">{{ group.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<script>
+    document.getElementById("selectAll").addEventListener("click", function(e) {
+        let checkboxes = document.querySelectorAll('input[name="selected_users"]');
+        checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
+    });
+</script>
+{% endblock %}

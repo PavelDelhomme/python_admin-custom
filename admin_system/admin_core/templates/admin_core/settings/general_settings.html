@@ -1,0 +1,83 @@
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}General Settings{% endblock %}
+{% block content %}
+<h1>General Settings</h1>
+
+<form id="settingsForm" method="post" action="{% url 'general_settings' %}">
+    {% csrf_token %}
+
+    <!-- Language Code -->
+    <div class="mb-3">
+        <label for="language_code">Language Code</label>
+        <select id="language_code" name="LANGUAGE_CODE" class="form-control">
+            <option value="en-us" {% if settings.LANGUAGE_CODE == "en-us" %}selected{% endif %}>English (US)</option>
+            <option value="fr-fr" {% if settings.LANGUAGE_CODE == "fr-fr" %}selected{% endif %}>French (FR)</option>
+        </select>
+    </div>
+
+    <!-- Time Zone -->
+    <div class="mb-3">
+        <label for="timezone">Time Zone</label>
+        <select id="timezone" name="TIME_ZONE" class="form-control">
+            <option value="UTC" {% if settings.TIME_ZONE == "UTC" %}selected{% endif %}>UTC</option>
+            <option value="Europe/Paris" {% if settings.TIME_ZONE == "Europe/Paris" %}selected{% endif %}>Paris</option>
+        </select>
+    </div>
+
+    <!-- Debug Mode -->
+    <div class="mb-3">
+        <label for="debug">Debug Mode</label>
+        <input type="checkbox" id="debug" name="DEBUG" class="form-check-input" {% if settings.DEBUG %}checked{% endif %}>
+    </div>
+
+    <!-- Allowed Hosts -->
+    <div class="mb-3">
+        <label for="allowed_hosts">Allowed Hosts (comma-separated)</label>
+        <input type="text" id="allowed_hosts" name="ALLOWED_HOSTS" class="form-control" value="{{ settings.ALLOWED_HOSTS|join:', ' }}">
+    </div>
+
+    <!-- Database Configuration -->
+    <h4>Database Settings</h4>
+    <div class="mb-3">
+        <label for="db_engine">Database Engine</label>
+        <input type="text" id="db_engine" name="DB_ENGINE" class="form-control" value="{{ settings.DATABASES.default.ENGINE }}">
+    </div>
+    <div class="mb-3">
+        <label for="db_name">Database Name</label>
+        <input type="text" id="db_name" name="DB_NAME" class="form-control" value="{{ settings.DATABASES.default.NAME }}">
+    </div>
+    <div class="mb-3">
+        <label for="db_user">Database User</label>
+        <input type="text" id="db_user" name="DB_USER" class="form-control" value="{{ settings.DATABASES.default.USER }}">
+    </div>
+    <div class="mb-3">
+        <label for="db_password">Database Password</label>
+        <input type="password" id="db_password" name="DB_PASSWORD" class="form-control" value="{{ settings.DATABASES.default.PASSWORD }}">
+    </div>
+    <div class="mb-3">
+        <label for="db_host">Database Host</label>
+        <input type="text" id="db_host" name="DB_HOST" class="form-control" value="{{ settings.DATABASES.default.HOST }}">
+    </div>
+    <div class="mb-3">
+        <label for="db_port">Database Port</label>
+        <input type="text" id="db_port" name="DB_PORT" class="form-control" value="{{ settings.DATABASES.default.PORT }}">
+    </div>
+
+    <!-- JWT Configuration -->
+    <h4>JWT Settings</h4>
+    <div class="mb-3">
+        <label for="access_token_lifetime">Access Token Lifetime (minutes)</label>
+        <input type="number" id="access_token_lifetime" name="ACCESS_TOKEN_LIFETIME" class="form-control" value="{{ settings.SIMPLE_JWT.ACCESS_TOKEN_LIFETIME.total_seconds|floatformat:0 }}">
+    </div>
+    <div class="mb-3">
+        <label for="refresh_token_lifetime">Refresh Token Lifetime (days)</label>
+        <input type="number" id="refresh_token_lifetime" name="REFRESH_TOKEN_LIFETIME" class="form-control" value="{{ settings.SIMPLE_JWT.REFRESH_TOKEN_LIFETIME.days }}">
+    </div>
+    <div class="mb-3">
+        <label for="rotate_refresh_tokens">Rotate Refresh Tokens</label>
+        <input type="checkbox" id="rotate_refresh_tokens" name="ROTATE_REFRESH_TOKENS" class="form-check-input" {% if settings.SIMPLE_JWT.ROTATE_REFRESH_TOKENS %}checked{% endif %}>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+{% endblock %}

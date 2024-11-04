@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'dashboard' %}">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+
+            <!-- Menu pour la gestion des utilisateurs et groupes -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Users & Groups
+                </a>
+                <div class="dropdown-menu" aria-labelledby="userMenu">
+                    <a class="dropdown-item" href="{% url 'user_management' %}">Manage Users</a>
+                    <a class="dropdown-item" href="{% url 'group_management' %}">Manage Groups</a>
+                </div>
+            </li>
+
+            <!-- Menu pour la gestion des paramètres et de l'administration -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="settingsMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="settingsMenu">
+                    <a class="dropdown-item" href="{% url 'settings' %}">General Settings</a>
+                    <a class="dropdown-item" href="{% url 'settings_visibility' %}">Field Visibility</a>
+                    <a class="dropdown-item" href="{% url 'manage_permissions' %}">Permissions</a>
+                    <a class="dropdown-item" href="{% url 'manage_tokens' %}">Manage Tokens</a>
+                    <a class="dropdown-item" href="{% url 'manage_logs' %}">View Logs</a>
+                </div>
+            </li>
+
+            <!-- Gestion des graphiques -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'manage_charts' %}">Manage Charts</a>
+            </li>
+
+            <!-- Option de déconnexion -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

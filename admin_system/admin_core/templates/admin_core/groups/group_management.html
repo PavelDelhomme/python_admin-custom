@@ -1,0 +1,25 @@
+{% extends "admin_core/base/base_admin.html" %}
+
+{% block title %}Manage Groups{% endblock %}
+
+{% block content %}
+<h1>Manage Groups</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" name="group_name" placeholder="New group name" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Group</button>
+</form>
+
+<ul class="list-group mt-4">
+    {% for group in groups %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ group.name }}
+        <!-- Suppression d'un groupe -->
+        <a href="{% url 'delete_group' group.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

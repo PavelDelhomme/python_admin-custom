@@ -1,0 +1,116 @@
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<h1>Settings</h1>
+
+<form id="settingsForm" method="post" action="{% url 'update_visible_fields' %}">
+    {% csrf_token %}
+
+    {% for model_name, model_data in model_fields.items %}
+        <div class="accordion" id="settingsAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ model_name }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ model_name }}" aria-expanded="false" aria-controls="collapse{{ model_name }}">
+                        {{ model_name }} Field Visibility
+                    </button>
+                </h2>
+                <div id="collapse{{ model_name }}" class="accordion-collapse collapse" aria-labelledby="heading{{ model_name }}" data-bs-parent="#settingsAccordion">
+                    <div class="accordion-body">
+                        <div class="form-group">
+                            <label>Select fields to display for {{ model_name }}:</label>
+                            <!-- Case à cocher pour sélectionner tout -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input select-all-checkbox" type="checkbox" data-model="{{ model_name }}" id="select_all_{{ model_name }}">
+                                <label class="form-check-label fw-bold" for="select_all_{{ model_name }}">
+                                    Select All
+                                </label>
+                            </div>
+
+                            {% for field in model_data.fields %}
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input field-checkbox" type="checkbox" name="{{ model_name }}_fields" value="{{ field.name }}" id="{{ model_name }}_{{ field.name }}" data-model="{{ model_name }}" {% if field.name in model_data.visible_fields %}checked{% endif %}>
+                                    <label class="form-check-label field-label {% if field.name in model_data.visible_fields %}checked{% endif %}" for="{{ model_name }}_{{ field.name }}">
+                                        {{ field.verbose_name }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</form>
+
+<!-- Styles pour les couleurs de fond -->
+<style>
+    .field-label.checked {
+        background-color: green;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    .field-label.unchecked {
+        background-color: orange;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- JavaScript pour la gestion des interactions -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("settingsForm");
+
+        // Fonction pour enregistrer automatiquement les modifications
+        function saveChanges() {
+            const formData = new FormData(form);
+            fetch("{% url 'update_visible_fields' %}", {
+                method: "POST",
+                body: formData,
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Settings updated successfully");
+                }
+            });
+        }
+
+        // Gestion de la sélection/désélection de tous les champs pour chaque modèle
+        document.querySelectorAll(".select-all-checkbox").forEach(checkbox => {
+            checkbox.addEventListener("change", function () {
+                const modelName = this.getAttribute("data-model");
+                const isChecked = this.checked;
+                document.querySelectorAll(`.field-checkbox[data-model="${modelName}"]`).forEach(fieldCheckbox => {
+                    fieldCheckbox.checked = isChecked;
+                    updateFieldStyle(fieldCheckbox);
+                });
+                saveChanges();
+            });
+        });
+
+        // Enregistrer les changements quand on coche ou décoche une case
+        document.querySelectorAll(".field-checkbox").forEach(checkbox => {
+            checkbox.addEventListener("change", function () {
+                updateFieldStyle(this);
+                saveChanges();
+            });
+        });
+
+        // Mise à jour du style de chaque champ en fonction de l'état (coché ou non)
+        function updateFieldStyle(checkbox) {
+            const label = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                label.classList.add("checked");
+                label.classList.remove("unchecked");
+            } else {
+                label.classList.add("unchecked");
+                label.classList.remove("checked");
+            }
+        }
+
+        // Appliquer le style initial lors du chargement
+        document.querySelectorAll(".field-checkbox").forEach(updateFieldStyle);
+    });
+</script>
+{% endblock %}

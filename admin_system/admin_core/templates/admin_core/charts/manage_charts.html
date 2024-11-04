@@ -1,0 +1,78 @@
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}Manage Charts{% endblock %}
+{% block content %}
+<h1>Manage Charts</h1>
+
+<!-- Formulaire de création de chart -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-group">
+        <label for="name">Chart Name</label>
+        {{ form.name }}
+    </div>
+    <div class="form-group">
+        <label for="chart_type">Chart Type</label>
+        {{ form.chart_type }}
+    </div>
+    <div class="form-group">
+        <label for="model">Select Model</label>
+        <select name="model" id="model" class="form-control">
+            {% for model in models %}
+            <option value="{{ model.name }}">{{ model.verbose_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="field">Select Field</label>
+        <select name="field" id="field" class="form-control">
+            <!-- This will be populated by JavaScript based on model selection -->
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Chart</button>
+</form>
+
+<!-- Affichage des charts existants -->
+<div class="mt-5">
+    <h2>Existing Charts</h2>
+    <div class="row">
+        {% for chart in charts %}
+        <div class="col-md-6 mb-4">
+            <h4>{{ chart.name }}</h4>
+            <canvas id="chart_{{ chart.id }}"></canvas>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Script to load fields based on model selection
+    document.getElementById("model").addEventListener("change", function() {
+        let model = this.value;
+        fetch(`/api/get_fields/?model=${model}`)
+            .then(response => response.json())
+            .then(data => {
+                const fieldSelect = document.getElementById("field");
+                fieldSelect.innerHTML = "";
+                data.fields.forEach(field => {
+                    const option = document.createElement("option");
+                    option.value = field.name;
+                    option.text = field.verbose_name;
+                    fieldSelect.add(option);
+                });
+            });
+    });
+
+    // Script to render existing charts dynamically
+    {% for chart in charts %}
+    const ctx{{ chart.id }} = document.getElementById('chart_{{ chart.id }}').getContext('2d');
+    const chartData{{ chart.id }} = {
+        type: '{{ chart.chart_type }}',
+        data: JSON.parse('{{ chart.data_source|safe }}'),
+    };
+    new Chart(ctx{{ chart.id }}, chartData{{ chart.id }});
+    {% endfor %}
+</script>
+{% endblock %}

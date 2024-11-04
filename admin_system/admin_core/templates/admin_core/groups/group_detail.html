@@ -1,0 +1,20 @@
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}Group Detail{% endblock %}
+
+{% block content %}
+<h1>Group: {{ group.name }}</h1>
+<h3>Members</h3>
+<ul>
+    {% for user in users %}
+    <li>{{ user.username }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Permissions</h3>
+<ul>
+    {% for permission in permissions %}
+    <li>{{ permission.name }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'delete_group' group.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete Group</a>
+{% endblock %}

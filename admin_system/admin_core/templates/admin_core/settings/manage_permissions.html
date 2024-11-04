@@ -1,0 +1,27 @@
+{% extends "admin_core/base/base_admin.html" %}
+
+{% block title %}Manage Permissions{% endblock %}
+
+{% block content %}
+<h1>Manage Permissions</h1>
+
+<h3>Groups and Permissions</h3>
+<ul>
+    {% for group in groups %}
+        <li>{{ group.name }}
+            <ul>
+                {% for perm in group.permissions.all %}
+                    <li>{{ perm.name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+<h3>All Permissions</h3>
+<ul>
+    {% for perm in permissions %}
+        <li>{{ perm.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "admin_core/base/base_admin.html" %}
+
+{% block title %}Manage Tokens{% endblock %}
+{% block content %}
+<h1>Manage JWT Tokens</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Token ID</th>
+            <th>User</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for token in tokens %}
+        <tr>
+            <td>{{ token.jti }}</td>
+            <td>{{ token.user.username }}</td>
+            <td>
+                {% if not token.blacklisted %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="token_id" value="{{ token.id }}">
+                        <button type="submit" class="btn btn-danger">Revoke</button>
+                    </form>
+                {% else %}
+                    Revoked
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

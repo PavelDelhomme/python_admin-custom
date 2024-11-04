@@ -1,0 +1,21 @@
+<!-- admin_core/templates/admin_core/settings/manage_logs.html -->
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}View Logs{% endblock %}
+{% block content %}
+<h1>System Logs</h1>
+<ul>
+    {% for log in logs %}
+        <li><strong>{{ log.timestamp }}</strong> - <span class="badge badge-secondary">{{ log.level }}</span> - {{ log.message }}</li>
+    {% endfor %}
+</ul>
+{% if logs.has_other_pages %}
+    <div>
+        {% if logs.has_previous %}
+            <a href="?page={{ logs.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% if logs.has_next %}
+            <a href="?page={{ logs.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,4 +1,7 @@
 from datetime import datetime
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -10,6 +13,7 @@ class VersionHistory(models.Model):
     version = models.PositiveIntegerField()
     data = models.JSONField()
     modified_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         unique_together = ('content_type', 'object_id', 'version')
