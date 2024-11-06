@@ -1,27 +1,108 @@
 {% extends "admin_core/base/base_admin.html" %}
-
 {% block title %}Manage Permissions{% endblock %}
 
 {% block content %}
-<h1>Manage Permissions</h1>
+<style>
+    /* Custom styles for switch toggle and highlight */
+    .switch-toggle {
+        position: relative;
+        width: 50px;
+        height: 25px;
+        background-color: #ccc;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .switch-toggle:before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 21px;
+        height: 21px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.3s;
+    }
+    .switch-toggle.active {
+        background-color: #007bff;
+    }
+    .switch-toggle.active:before {
+        transform: translateX(25px);
+    }
+    /* Styling for entire row clickability */
+    .list-group-item {
+        cursor: pointer;
+    }
+    /* Halo effect for sub-elements */
+    .list-group-item:hover {
+        box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5);
+    }
+    .card-header button {
+        width: 100%;
+        text-align: left;
+        background-color: transparent;
+        border: none;
+        color: #333;
+        font-weight: bold;
+    }
+    .card-header button:focus {
+        outline: none;
+    }
+</style>
 
-<h3>Groups and Permissions</h3>
-<ul>
-    {% for group in groups %}
-        <li>{{ group.name }}
-            <ul>
-                {% for perm in group.permissions.all %}
-                    <li>{{ perm.name }}</li>
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <h1>Manage Permissions</h1>
 
-<h3>All Permissions</h3>
-<ul>
-    {% for perm in permissions %}
-        <li>{{ perm.name }}</li>
-    {% endfor %}
-</ul>
+    {% if groups %}
+        <h3>Groups and Permissions</h3>
+        <div id="groupPermissionsAccordion">
+            {% for group in groups %}
+                <div class="card">
+                    <div class="card-header" id="heading{{ group.id }}">
+                        <h5 class="mb-0">
+                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{ group.id }}" aria-expanded="false" aria-controls="collapse{{ group.id }}">
+                                {{ group.name }}
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapse{{ group.id }}" class="collapse" aria-labelledby="heading{{ group.id }}" data-parent="#groupPermissionsAccordion">
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% if permissions %}
+                                    <ul class="list-group">
+                                        {% for perm in permissions %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center" onclick="toggleSwitch('perm{{ perm.id }}')">
+                                                {{ perm.name }}
+                                                <div class="switch-toggle {% if perm in group.permissions.all %}active{% endif %}" id="switch-{{ perm.id }}" onclick="toggleSwitch('perm{{ perm.id }}')">
+                                                    <input type="checkbox" name="permissions" value="{{ perm.id }}" {% if perm in group.permissions.all %}checked{% endif %} class="form-check-input d-none" id="perm{{ perm.id }}">
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <button type="submit" class="btn btn-primary mt-3">Update Permissions</button>
+                                {% else %}
+                                    <p>No permissions available to display.</p>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No groups available to display.</p>
+    {% endif %}
+</div>
+
+<script>
+    // Function to toggle the switch appearance and checkbox state
+    function toggleSwitch(checkboxId) {
+        const checkbox = document.getElementById(checkboxId);
+        const switchContainer = checkbox.parentElement;
+        checkbox.checked = !checkbox.checked;
+        switchContainer.classList.toggle('active', checkbox.checked);
+    }
+</script>
 {% endblock %}

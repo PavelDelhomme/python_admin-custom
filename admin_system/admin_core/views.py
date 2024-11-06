@@ -1,3 +1,4 @@
+import json
 from datetime import timedelta
 
 from django.conf import settings
@@ -18,6 +19,8 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import get_resolver
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
@@ -139,18 +142,22 @@ def manage_charts_view(request):
 @login_required
 def user_management_view(request):
     visible_user_fields = Setting.get_visible_fields('CustomUser')
-    users = CustomUser.objects.all()
-    fields_to_display = [field for field in CustomUser._meta.fields if field.name in visible_user_fields]
+    essential_fields = ['username', 'email']
+    fields_to_display = [
+        field for field in CustomUser._meta.fields
+        if field.name in visible_user_fields or field.name in essential_fields
+    ]
 
-    # Débogage : Affiche les noms des champs récupérés
-    print("Champs à afficher : ", [field.name for field in fields_to_display])
+    users = CustomUser.objects.all()
+    paginator = Paginator(users, 10)  # 10 users per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'users': users,
+        'page_obj': page_obj,
         'fields_to_display': fields_to_display
     }
     return render(request, 'admin_core/users/user_management.html', context)
-
 
 @staff_member_required
 def user_detail_view(request, user_id):
@@ -251,21 +258,25 @@ def general_settings_view(request):
         "ALLOWED_HOSTS": ProjectSetting.objects.filter(key="ALLOWED_HOSTS").first() or ','.join(settings.ALLOWED_HOSTS),
 
         # Database settings
-        "DB_ENGINE": ProjectSetting.objects.filter(key="DB_ENGINE").first() or settings.DATABASES['default']['ENGINE'],
-        "DB_NAME": ProjectSetting.objects.filter(key="DB_NAME").first() or settings.DATABASES['default']['NAME'],
-        "DB_USER": ProjectSetting.objects.filter(key="DB_USER").first() or settings.DATABASES['default']['USER'],
-        "DB_PASSWORD": ProjectSetting.objects.filter(key="DB_PASSWORD").first() or settings.DATABASES['default'][
-            'PASSWORD'],
-        "DB_HOST": ProjectSetting.objects.filter(key="DB_HOST").first() or settings.DATABASES['default']['HOST'],
-        "DB_PORT": ProjectSetting.objects.filter(key="DB_PORT").first() or settings.DATABASES['default']['PORT'],
-
+        "DATABASE_SETTINGS": {
+            "DB_ENGINE": ProjectSetting.objects.filter(key="DB_ENGINE").first() or settings.DATABASES['default'][
+                'ENGINE'],
+            "DB_NAME": ProjectSetting.objects.filter(key="DB_NAME").first() or settings.DATABASES['default']['NAME'],
+            "DB_USER": ProjectSetting.objects.filter(key="DB_USER").first() or settings.DATABASES['default']['USER'],
+            "DB_PASSWORD": ProjectSetting.objects.filter(key="DB_PASSWORD").first() or settings.DATABASES['default'][
+                'PASSWORD'],
+            "DB_HOST": ProjectSetting.objects.filter(key="DB_HOST").first() or settings.DATABASES['default']['HOST'],
+            "DB_PORT": ProjectSetting.objects.filter(key="DB_PORT").first() or settings.DATABASES['default']['PORT'],
+        },
         # JWT Settings
-        "ACCESS_TOKEN_LIFETIME": ProjectSetting.objects.filter(key="ACCESS_TOKEN_LIFETIME").first() or
-                                 settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
-        "REFRESH_TOKEN_LIFETIME": ProjectSetting.objects.filter(key="REFRESH_TOKEN_LIFETIME").first() or
-                                  settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
-        "ROTATE_REFRESH_TOKENS": ProjectSetting.objects.filter(key="ROTATE_REFRESH_TOKENS").first() or
-                                 settings.SIMPLE_JWT['ROTATE_REFRESH_TOKENS'],
+        "JWT_SETTINGS": {
+            "ACCESS_TOKEN_LIFETIME": ProjectSetting.objects.filter(key="ACCESS_TOKEN_LIFETIME").first() or
+                                     settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+            "REFRESH_TOKEN_LIFETIME": ProjectSetting.objects.filter(key="REFRESH_TOKEN_LIFETIME").first() or
+                                      settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+            "ROTATE_REFRESH_TOKENS": ProjectSetting.objects.filter(key="ROTATE_REFRESH_TOKENS").first() or
+                                     settings.SIMPLE_JWT['ROTATE_REFRESH_TOKENS'],
+        }
     }
 
     if request.method == "POST":
@@ -318,12 +329,50 @@ def settings_view(request):
     return render(request, 'admin_core/settings/general_settings.html', context)
 
 
+
+
+@csrf_exempt
+@staff_member_required
+def update_field_visibility(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        model_name = data.get('model')
+        field_name = data.get('field')
+        visible = data.get('visible')
+
+        # Update the visibility setting in the database
+        visible_fields_key = f"{model_name}_visible_fields"
+        setting, created = Setting.objects.get_or_create(key=visible_fields_key)
+        visible_fields = setting.value.split(',') if setting.value else []
+
+        if visible and field_name not in visible_fields:
+            visible_fields.append(field_name)
+        elif not visible and field_name in visible_fields:
+            visible_fields.remove(field_name)
+
+        setting.value = ','.join(visible_fields)
+        setting.save()
+
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'failed'}, status=400)
+
+
 @staff_member_required
 def manage_permissions_view(request):
     permissions = Permission.objects.all()
     groups = Group.objects.all()
+    print("Permissions : ", permissions)
+    print("Groups : ", groups)
     return render(request, 'admin_core/settings/manage_permissions.html',
                   {'permissions': permissions, 'groups': groups})
+@staff_member_required
+def update_group_permissions(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    if request.method == "POST":
+        selected_perms = request.POST.getlist("permissions")
+        group.permissions.set(selected_perms)
+        messages.success(request, f"Permissions updated for group {group.name}.")
+    return redirect("manage_permissions")
 
 
 @staff_member_required
@@ -347,7 +396,7 @@ def version_history_view(request, model_name, object_id):
 
 
 @login_required
-def manage_chart_view(request):
+def manage_charts_view(request):
     charts = CustomChart.objects.filter(created_by=request.user)
     models = apps.get_models()
 
@@ -362,18 +411,150 @@ def manage_chart_view(request):
             model = apps.get_model(app_label, model_name)
             data = list(model.objects.values_list(field_name, flat=True))
 
-            # Format the data for Chart.js
-            chart.data_source = {'labels': list(range(len(data))), 'datasets': [{'data': data}]}
+            # Prepare data for Chart.js
+            chart.data_source = json.dumps({
+                'labels': list(range(len(data))),
+                'datasets': [{'data': data}]
+            })
             chart.save()
             return redirect('manage_charts')
     else:
         form = ChartCreateForm()
 
-    return render(request, 'admin_core/charts/manage_charts.html', {
+    context = {
         'charts': charts,
         'form': form,
         'models': [{'name': model.__name__, 'verbose_name': model._meta.verbose_name} for model in models],
-    })
+    }
+    return render(request, 'admin_core/charts/manage_charts.html', context)
+
+
+@staff_member_required
+def configure_settings_view(request):
+    """Vue pour afficher et modifier les paramètres JWT et Database."""
+    if request.method == "POST":
+        # Sauvegarder les nouvelles valeurs pour JWT et Database
+        jwt_settings = {
+            "ACCESS_TOKEN_LIFETIME": request.POST.get("ACCESS_TOKEN_LIFETIME"),
+            "REFRESH_TOKEN_LIFETIME": request.POST.get("REFRESH_TOKEN_LIFETIME"),
+            "ROTATE_REFRESH_TOKENS": request.POST.get("ROTATE_REFRESH_TOKENS") == "on",
+        }
+        database_settings = {
+            "ENGINE": request.POST.get("DB_ENGINE"),
+            "NAME": request.POST.get("DB_NAME"),
+            "USER": request.POST.get("DB_USER"),
+            "PASSWORD": request.POST.get("DB_PASSWORD"),
+            "HOST": request.POST.get("DB_HOST"),
+            "PORT": request.POST.get("DB_PORT"),
+        }
+        # Sauvegarder dans ProjectSetting
+        for key, value in {**jwt_settings, **database_settings}.items():
+            ProjectSetting.objects.update_or_create(key=key, defaults={"value": value})
+
+        return redirect("configure_settings")
+
+    project_settings = {
+        "JWT_SETTINGS": {
+            "ACCESS_TOKEN_LIFETIME": settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+            "REFRESH_TOKEN_LIFETIME": settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+            "ROTATE_REFRESH_TOKENS": settings.SIMPLE_JWT['ROTATE_REFRESH_TOKENS'],
+        },
+        "DATABASE_SETTINGS": {
+            "ENGINE": settings.DATABASES['default']['ENGINE'],
+            "NAME": settings.DATABASES['default']['NAME'],
+            "USER": settings.DATABASES['default']['USER'],
+            "PASSWORD": settings.DATABASES['default']['PASSWORD'],
+            "HOST": settings.DATABASES['default']['HOST'],
+            "PORT": settings.DATABASES['default']['PORT'],
+        },
+    }
+
+    return render(request, "admin_core/settings/configure_settings.html", {"settings": project_settings})
+
+@staff_member_required
+def jwt_and_db_settings_view(request):
+    if request.method == 'POST':
+        settings_data = request.POST
+
+        ProjectSetting.objects.update_or_create(
+            key="ACCESS_TOKEN_LIFETIME",
+            defaults={"value": settings_data.get("ACCESS_TOKEN_LIFETIME")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="REFRESH_TOKEN_LIFETIME",
+            defaults={"value": settings_data.get("REFRESH_TOKEN_LIFETIME")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="ROTATE_REFRESH_TOKENS",
+            defaults={"value": settings_data.get("ROTATE_REFRESH_TOKENS", "off") == "on"},
+        )
+
+
+        # Update Database Settings
+        ProjectSetting.objects.update_or_create(
+            key="DB_ENGINE",
+            defaults={"value": settings_data.get("DB_ENGINE")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="DB_NAME",
+            defaults={"value": settings_data.get("DB_NAME")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="DB_USER",
+            defaults={"value": settings_data.get("DB_USER")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="DB_PASSWORD",
+            defaults={"value": settings_data.get("DB_PASSWORD")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="DB_HOST",
+            defaults={"value": settings_data.get("DB_HOST")},
+        )
+        ProjectSetting.objects.update_or_create(
+            key="DB_PORT",
+            defaults={"value": settings_data.get("DB_PORT")},
+        )
+
+        call_command("reload_settings")
+        return redirect("jwt_and_db_settings")
+
+    # Load current settings
+    jwt_settings = {
+        "ACCESS_TOKEN_LIFETIME": settings.SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"],
+        "REFRESH_TOKEN_LIFETIME": settings.SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"],
+        "ROTATE_REFRESH_TOKENS": settings.SIMPLE_JWT["ROTATE_REFRESH_TOKENS"],
+    }
+    db_settings = {
+        "ENGINE": settings.DATABASES["default"]["ENGINE"],
+        "NAME": settings.DATABASES["default"]["NAME"],
+        "USER": settings.DATABASES["default"]["USER"],
+        "PASSWORD": settings.DATABASES["default"]["PASSWORD"],
+        "HOST": settings.DATABASES["default"]["HOST"],
+        "PORT": settings.DATABASES["default"]["PORT"],
+    }
+
+    context = {"jwt_settings": jwt_settings, "db_settings": db_settings}
+    return render(request, "admin_core/settings/jwt_and_db_settings.html", context)
+
+@staff_member_required
+def list_routes_view(request):
+    url_resolver = get_resolver()
+    url_patterns = url_resolver.url_patterns
+    routes = []
+
+    for pattern in url_patterns:
+        if hasattr(pattern, 'name') and pattern.name:
+            route = str(pattern.pattern)
+            name = pattern.name
+            routes.append((route, name))
+        elif hasattr(pattern, 'url_patterns'):
+            for sub_pattern in pattern.url_patterns:
+                if hasattr(sub_pattern, 'name') and sub_pattern.name:
+                    route = f"{pattern.pattern}/{sub_pattern.pattern}"
+                    name = sub_pattern.name
+                    routes.append((route, name))
+    return render(request, "admin_core/settings/list_routes.html", {"routes": routes})
 
 
 @login_required

@@ -5,8 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-
-            <!-- Menu pour la gestion des utilisateurs et groupes -->
+            <!-- User & Group Management -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Users & Groups
@@ -14,10 +13,10 @@
                 <div class="dropdown-menu" aria-labelledby="userMenu">
                     <a class="dropdown-item" href="{% url 'user_management' %}">Manage Users</a>
                     <a class="dropdown-item" href="{% url 'group_management' %}">Manage Groups</a>
+                    <a class="dropdown-item" href="{% url 'manage_permissions' %}">Manage Permissions</a>
                 </div>
             </li>
-
-            <!-- Menu pour la gestion des paramètres et de l'administration -->
+            <!-- Settings Management -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="settingsMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Settings
@@ -25,18 +24,20 @@
                 <div class="dropdown-menu" aria-labelledby="settingsMenu">
                     <a class="dropdown-item" href="{% url 'settings' %}">General Settings</a>
                     <a class="dropdown-item" href="{% url 'settings_visibility' %}">Field Visibility</a>
-                    <a class="dropdown-item" href="{% url 'manage_permissions' %}">Permissions</a>
+                    <a class="dropdown-item" href="{% url 'jwt_and_db_settings' %}">JWT & Database Settings</a>
                     <a class="dropdown-item" href="{% url 'manage_tokens' %}">Manage Tokens</a>
                     <a class="dropdown-item" href="{% url 'manage_logs' %}">View Logs</a>
                 </div>
             </li>
-
-            <!-- Gestion des graphiques -->
+            <!-- Charts Management -->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'manage_charts' %}">Manage Charts</a>
             </li>
-
-            <!-- Option de déconnexion -->
+            <!-- View Routes List -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'list_routes' %}">Routes</a>
+            </li>
+            <!-- Logout -->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>

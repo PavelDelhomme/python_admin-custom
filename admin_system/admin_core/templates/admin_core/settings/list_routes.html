@@ -1,0 +1,22 @@
+{% extends "admin_core/base/base_admin.html" %}
+{% block content %}
+<div class="container my-4">
+    <h1>All Routes</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>URL Pattern</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route, name in routes %}
+                <tr>
+                    <td>{{ route }}</td>
+                    <td>{{ name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

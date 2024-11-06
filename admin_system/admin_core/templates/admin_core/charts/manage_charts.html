@@ -3,7 +3,6 @@
 {% block content %}
 <h1>Manage Charts</h1>
 
-<!-- Formulaire de création de chart -->
 <form method="post">
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -25,14 +24,11 @@
     </div>
     <div class="form-group">
         <label for="field">Select Field</label>
-        <select name="field" id="field" class="form-control">
-            <!-- This will be populated by JavaScript based on model selection -->
-        </select>
+        <select name="field" id="field" class="form-control"></select>
     </div>
     <button type="submit" class="btn btn-primary">Add Chart</button>
 </form>
 
-<!-- Affichage des charts existants -->
 <div class="mt-5">
     <h2>Existing Charts</h2>
     <div class="row">
@@ -48,7 +44,6 @@
 
 {% block extra_scripts %}
 <script>
-    // Script to load fields based on model selection
     document.getElementById("model").addEventListener("change", function() {
         let model = this.value;
         fetch(`/api/get_fields/?model=${model}`)
@@ -65,12 +60,11 @@
             });
     });
 
-    // Script to render existing charts dynamically
     {% for chart in charts %}
     const ctx{{ chart.id }} = document.getElementById('chart_{{ chart.id }}').getContext('2d');
     const chartData{{ chart.id }} = {
         type: '{{ chart.chart_type }}',
-        data: JSON.parse('{{ chart.data_source|safe }}'),
+        data: JSON.parse('{{ chart.data_source|escapejs }}'),
     };
     new Chart(ctx{{ chart.id }}, chartData{{ chart.id }});
     {% endfor %}

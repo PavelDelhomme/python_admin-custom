@@ -7,28 +7,30 @@
 
 <form method="post" action="{% url 'bulk_user_action' %}" id="userForm">
     {% csrf_token %}
-    <table class="table">
-    <thead>
-        <tr>
-            <th><input type="checkbox" id="selectAll"></th>
-            {% for field in fields_to_display %}
-            <th>{{ field.verbose_name }}</th>
-            {% endfor %}
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-        <tr>
-            <td><input type="checkbox" name="selected_users" value="{{ user.id }}"></td>
-            {% for field in fields_to_display %}
-            <td>{{ user|get_attr:field.name|default:"N/A" }}</td>
-            {% endfor %}
-            <td><a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-primary">Edit</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    </table>
+    <div style="overflow-x: auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="selectAll"></th>
+                    {% for field in fields_to_display %}
+                    <th>{{ field.verbose_name }}</th>
+                    {% endfor %}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in page_obj %}
+                <tr>
+                    <td><input type="checkbox" name="selected_users" value="{{ user.id }}"></td>
+                    {% for field in fields_to_display %}
+                    <td>{{ user|get_attr:field.name|default:"N/A" }}</td>
+                    {% endfor %}
+                    <td><a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-primary">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <button type="submit" name="action" value="delete" class="btn btn-danger">Delete Selected</button>
     <button type="submit" name="action" value="add_to_group" class="btn btn-info">Add to Group</button>
     <select name="group_id" class="form-control d-inline w-auto">
@@ -37,6 +39,13 @@
         {% endfor %}
     </select>
 </form>
+
+<!-- Pagination controls -->
+<div class="pagination mt-3">
+    <span class="page-link">{% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% else %}Previous{% endif %}</span>
+    <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    <span class="page-link">{% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a>{% else %}Next{% endif %}</span>
+</div>
 
 <script>
     document.getElementById("selectAll").addEventListener("click", function(e) {

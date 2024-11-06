@@ -4,42 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Gestion des utilisateur pour le moment en cours">
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/middleware.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0003_setting.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0004_customchart_last_modified_customchart_version_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/migrations/0005_setting_description_alter_setting_value.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/groups/group_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/groups/group_management.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/history/version_history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/login/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/field_visibility.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/general_settings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_logs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_permissions.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_tokens.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/settings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templatetags/custom_filters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/core/migrations/0003_versionhistory_user.py" afterDir="false" />
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Ajout de la fonctionnalité de gestion des utilisateur et groupe et d'une interface d'administration customisable">
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/configure_settings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/jwt_and_db_settings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/list_routes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python_admin-custom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python_admin-custom.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/base_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/dashboard/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/edit_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/edit_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/edit_user_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/edit_user_groups.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/manage_charts.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/reset_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/user_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/field_visibility.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/field_visibility.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_permissions.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_permissions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -70,12 +48,12 @@
     &quot;assignee&quot;: &quot;PavelDelhomme&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/PavelDelhomme/python_admin-custom.git&quot;,
-    &quot;accountId&quot;: &quot;bff4a81b-021e-4c4f-90a0-6465b05c56f4&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/PavelDelhomme/python_admin-custom.git",
+    "accountId": "462b8cea-2cbd-41e3-9473-a42d0f71ffdc"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -87,14 +65,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.Run server.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/pavel/PycharmProjects/python_admin-custom/admin_system"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/admin_system" />
@@ -103,6 +83,31 @@
       <recent name="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/login" />
       <recent name="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/groups" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Run server" type="PythonConfigurationType" factoryName="Python">
+      <module name="python_admin-custom" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (python_admin-custom)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/admin_system" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/admin_system/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -155,6 +160,17 @@
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
