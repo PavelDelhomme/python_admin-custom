@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Ajout de la fonctionnalité de gestion des utilisateur et groupe et d'une interface d'administration customisable">
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/configure_settings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/jwt_and_db_settings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/list_routes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/python_admin-custom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python_admin-custom.iml" afterDir="false" />
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Avant la collectstatic quoi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/field_visibility.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/field_visibility.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_permissions.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/settings/manage_permissions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/dashboard/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/dashboard/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/edit_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/edit_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -158,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730727990066</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Avant la collectstatic quoi">
+      <option name="closed" value="true" />
+      <created>1730893231958</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730893231958</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -179,6 +179,7 @@
     <MESSAGE value="Ajout de la fouronttionnalite de certainne cose non fonctionnelle" />
     <MESSAGE value="Ajout de la fonctionnalité de gestion des utilisateur et groupe et d'une interface d'administration customisable" />
     <MESSAGE value="Gestion des utilisateur pour le moment en cours" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gestion des utilisateur pour le moment en cours" />
+    <MESSAGE value="Avant la collectstatic quoi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avant la collectstatic quoi" />
   </component>
 </project>

@@ -12,7 +12,11 @@
         <h3>Recent Users</h3>
         <ul>
             {% for user in recent_users %}
-                <li>{{ user.username }} - {{ user.date_joined }}</li>
+                <li>
+                    <a href="{% url 'user_detail' user.id %}">
+                        {{ user.username }}
+                    </a> - {{ user.date_joined }}
+                </li>
             {% endfor %}
         </ul>
     </div>

@@ -144,7 +144,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Configuration pour inclure les fichiers statiques de Django Admin et vos propres fichiers CSS
 STATICFILES_DIRS = [
-    BASE_DIR / "admin_core" / "static",  # Chemin vers vos fichiers statiques personnalisés
+    BASE_DIR / "static",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"  # Répertoire où collectstatic rassemblera les fichiers
