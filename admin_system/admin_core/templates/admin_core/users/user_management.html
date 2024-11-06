@@ -1,5 +1,24 @@
 {% extends "admin_core/base/base_admin.html" %}
 {% block title %}Manage Users{% endblock %}
+{% block extra_styles %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .user-card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        background-color: white;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .table-wrapper {
+        overflow-x: auto;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 {% load custom_filters %}
 
@@ -7,37 +26,46 @@
 
 <form method="post" action="{% url 'bulk_user_action' %}" id="userForm">
     {% csrf_token %}
-    <div style="overflow-x: auto;">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="selectAll"></th>
+
+    <div class="table-wrapper">
+        <div class="table">
+            <div class="thead">
+                <div class="user-card d-flex justify-content-between align-items-center">
+                    <div><input type="checkbox" id="selectAll"></div>
                     {% for field in fields_to_display %}
-                    <th>{{ field.verbose_name }}</th>
+                        <div><strong>{{ field.verbose_name }}</strong></div>
                     {% endfor %}
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+                    <div><strong>Actions</strong></div>
+                </div>
+            </div>
+
+            <div class="tbody">
                 {% for user in page_obj %}
-                <tr>
-                    <td><input type="checkbox" name="selected_users" value="{{ user.id }}"></td>
+                <div class="user-card d-flex justify-content-between align-items-center">
+                    <div><input type="checkbox" name="selected_users" value="{{ user.id }}"></div>
                     {% for field in fields_to_display %}
-                    <td>{{ user|get_attr:field.name|default:"N/A" }}</td>
+                        <div>{{ user|get_attr:field.name|default:"N/A" }}</div>
                     {% endfor %}
-                    <td><a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-primary">Edit</a></td>
-                </tr>
+                    <div>
+                        <a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'user_detail' user.id %}" class="btn btn-sm btn-secondary">Details</a>
+                    </div>
+                </div>
                 {% endfor %}
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
-    <button type="submit" name="action" value="delete" class="btn btn-danger">Delete Selected</button>
-    <button type="submit" name="action" value="add_to_group" class="btn btn-info">Add to Group</button>
-    <select name="group_id" class="form-control d-inline w-auto">
-        {% for group in groups %}
-        <option value="{{ group.id }}">{{ group.name }}</option>
-        {% endfor %}
-    </select>
+
+    <!-- Actions en bas -->
+    <div class="mt-4">
+        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete Selected</button>
+        <button type="submit" name="action" value="add_to_group" class="btn btn-info">Add to Group</button>
+        <select name="group_id" class="form-control d-inline w-auto">
+            {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
 </form>
 
 <!-- Pagination controls -->
