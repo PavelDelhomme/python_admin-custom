@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'admin_core',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'django_elasticsearch_dsl',
 ]
 
 # def load_project_settings():
@@ -170,4 +171,10 @@ SIMPLE_JWT = {
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    }
 }

@@ -1,5 +1,4 @@
 import json
-from datetime import timedelta
 
 from django.conf import settings
 from django.apps import apps
@@ -7,8 +6,7 @@ from django.core.management import call_command
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.contrib import messages
-from django.db import models
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.views.decorators import staff_member_required
@@ -21,9 +19,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import get_resolver
 from django.views.decorators.csrf import csrf_exempt
+from django_elasticsearch_dsl.search import Search
 
 from rest_framework import viewsets, status
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 
@@ -44,13 +42,12 @@ def get_app_label():
 @login_required
 def get_fields(request):
     model_name = request.GET.get('model')
-    app_label = get_app_label()
-    model = apps.get_model(app_label, model_name)
-    fields = [
-        {'name': field.name, 'verbose_name': field.verbose_name}
-        for field in model._meta.fields if field.get_internal_type() in ['IntegerField', 'FloatField']
-    ]
-    return JsonResponse({'fields': fields})
+    if model_name:
+        app_label = get_app_label()
+        model = apps.get_model(app_label, model_name)
+        fields = [{'name': field.name, 'verbose_name': field.verbose_name} for field in model._meta.fields]
+        return JsonResponse({'fields': fields})
+    return JsonResponse({'fields': []})
 
 
 def custom_login_view(request):
@@ -132,11 +129,26 @@ class ProjectSettingView(viewsets.ModelViewSet):
 
 @login_required
 def manage_charts_view(request):
+    form = ChartCreateForm(request.POST or None)
+    if form.is_valid():
+        chart = form.save(commit=False)
+        model_name = form.cleaned_data.get("model")
+        field_name = form.cleaned_data.get("field")
+
+        # Extraire les données pour le graphique
+        model = apps.get_model("app_name", model_name)  # Remplace "app_name"
+        data = list(model.objects.values_list(field_name, flat=True))
+
+        # Configuration des données de graphique
+        chart.data_source = json.dumps({
+            "labels": list(range(len(data))),
+            "datasets": [{"data": data}]
+        })
+        chart.save()
+        return redirect("manage_charts")
+
     charts = CustomChart.objects.filter(created_by=request.user)
-    context = {
-        'charts': charts
-    }
-    return render(request, 'admin_core/charts/manage_charts.html', context)
+    return render(request, "admin_core/charts/manage_charts.html", {"form": form, "charts": charts})
 
 
 @login_required
@@ -612,3 +624,31 @@ def manage_logs_view(request):
     page_number = request.GET.get("page")
     page_logs = paginator.get_page(page_number)
     return render(request, 'admin_core/settings/manage_logs.html', {"logs": page_logs})
+
+
+@login_required
+def search_results_view(request):
+    query = request.GET.get("q")
+    search = Search(index='')
+
+    # Détecter les tags
+    if query:
+        filters = query.split(" ")
+        if "/users" in filters:
+            search = Search(index='users')
+            query = query.replace("/users", "").strip()
+        elif "/groups" in filters:
+            search = Search(index='groups')
+            query = query.replace("/groups", "").strip()
+
+        # Appliquer la requête
+        if query:
+            search = search.query("multi_match", query=query, fields=['username', 'email', 'name'])
+
+    # Exécuter la recherche et renvoyer les résultats
+    results = search.execute()
+    context = {
+        "results": results,
+        "query": query,
+    }
+    return render(request, "admin_core/search/search_results.html", context)

@@ -1,72 +1,33 @@
+<!-- manage_charts.html -->
 {% extends "admin_core/base/base_admin.html" %}
 {% block title %}Manage Charts{% endblock %}
 {% block content %}
-<h1>Manage Charts</h1>
-
-<form method="post">
+<h2>Create a New Chart</h2>
+<form method="post" id="chart-form">
     {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="form-group">
-        <label for="name">Chart Name</label>
-        {{ form.name }}
-    </div>
-    <div class="form-group">
-        <label for="chart_type">Chart Type</label>
-        {{ form.chart_type }}
-    </div>
-    <div class="form-group">
-        <label for="model">Select Model</label>
-        <select name="model" id="model" class="form-control">
-            {% for model in models %}
-            <option value="{{ model.name }}">{{ model.verbose_name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="field">Select Field</label>
-        <select name="field" id="field" class="form-control"></select>
-    </div>
-    <button type="submit" class="btn btn-primary">Add Chart</button>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Chart</button>
 </form>
 
-<div class="mt-5">
-    <h2>Existing Charts</h2>
-    <div class="row">
-        {% for chart in charts %}
-        <div class="col-md-6 mb-4">
-            <h4>{{ chart.name }}</h4>
-            <canvas id="chart_{{ chart.id }}"></canvas>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
-
-{% block extra_scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.getElementById("model").addEventListener("change", function() {
-        let model = this.value;
-        fetch(`/api/get_fields/?model=${model}`)
-            .then(response => response.json())
-            .then(data => {
-                const fieldSelect = document.getElementById("field");
-                fieldSelect.innerHTML = "";
-                data.fields.forEach(field => {
-                    const option = document.createElement("option");
-                    option.value = field.name;
-                    option.text = field.verbose_name;
-                    fieldSelect.add(option);
+    $(document).ready(function() {
+        $('#id_model').change(function() {
+            var modelName = $(this).val();
+            if (modelName) {
+                $.ajax({
+                    url: '{% url "get_fields" %}',
+                    data: { 'model': modelName },
+                    success: function(data) {
+                        var fieldSelect = $('#id_field');
+                        fieldSelect.empty();
+                        data.fields.forEach(function(field) {
+                            fieldSelect.append(new Option(field.verbose_name, field.name));
+                        });
+                    }
                 });
-            });
+            }
+        });
     });
-
-    {% for chart in charts %}
-    const ctx{{ chart.id }} = document.getElementById('chart_{{ chart.id }}').getContext('2d');
-    const chartData{{ chart.id }} = {
-        type: '{{ chart.chart_type }}',
-        data: JSON.parse('{{ chart.data_source|escapejs }}'),
-    };
-    new Chart(ctx{{ chart.id }}, chartData{{ chart.id }});
-    {% endfor %}
 </script>
 {% endblock %}

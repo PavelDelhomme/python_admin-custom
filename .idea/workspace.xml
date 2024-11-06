@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Ajout de quelque petite modification dasn lanavigation pour améliorer l'ergonomie bref">
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/users/user_management.html" afterDir="false" />
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Amélioration de l'affichage des utlisateur">
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/documents.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/search/search_results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -161,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730894724519</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Amélioration de l'affichage des utlisateur">
+      <option name="closed" value="true" />
+      <created>1730895098866</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730895098866</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +201,7 @@
     <MESSAGE value="Gestion des utilisateur pour le moment en cours" />
     <MESSAGE value="Avant la collectstatic quoi" />
     <MESSAGE value="Ajout de quelque petite modification dasn lanavigation pour améliorer l'ergonomie bref" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de quelque petite modification dasn lanavigation pour améliorer l'ergonomie bref" />
+    <MESSAGE value="Amélioration de l'affichage des utlisateur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Amélioration de l'affichage des utlisateur" />
   </component>
 </project>

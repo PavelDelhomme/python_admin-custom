@@ -5,7 +5,7 @@ from .views import GenericModelViewSet, ProjectSettingView, dashboard_view, edit
     group_management_view, settings_view, custom_login_view, custom_logout_view, version_history_view, \
     group_detail_view, manage_tokens_view, bulk_user_action, get_fields, update_visible_fields, general_settings_view, \
     field_visibility_view, manage_logs_view, list_routes_view, update_group_permissions, update_field_visibility, \
-    jwt_and_db_settings_view
+    jwt_and_db_settings_view, search_results_view
 
 router = DefaultRouter()
 router.register(r'models/(?P<model>[^/.]+)', GenericModelViewSet, basename='model')
@@ -50,4 +50,6 @@ urlpatterns = [
     path('dashboard/', dashboard_view, name="dashboard"),
     path("login/", custom_login_view, name="login"),
     path("logout/", custom_logout_view, name="logout"),
+
+    path('search_results/', search_results_view, name="search_results"),
 ]

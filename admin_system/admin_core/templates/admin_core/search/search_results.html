@@ -1,0 +1,29 @@
+<!-- search_results.html -->
+{% extends "admin_core/base/base_admin.html" %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<h1>Search Results for "{{ query }}"</h1>
+<div class="results">
+    {% if results %}
+        {% for result in results %}
+            <div class="result-item card mb-2 p-2">
+                <h5>{{ result.username|default:"Group" }} {{ result.name|default:"" }}</h5>
+                <!-- Inclure d'autres détails selon le type de résultat -->
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</div>
+
+<!-- Pagination -->
+<div class="pagination mt-3">
+    {% if results.has_previous %}
+        <a href="?q={{ query }}&page={{ results.previous_page_number }}" class="btn btn-secondary">Previous</a>
+    {% endif %}
+    <span>Page {{ results.number }} of {{ results.paginator.num_pages }}</span>
+    {% if results.has_next %}
+        <a href="?q={{ query }}&page={{ results.next_page_number }}" class="btn btn-secondary">Next</a>
+    {% endif %}
+</div>
+{% endblock %}
