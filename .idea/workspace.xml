@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Amélioration de l'affichage des utlisateur">
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/documents.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/search/search_results.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/base/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/templates/admin_core/charts/manage_charts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/documents.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/documents.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
     </list>
@@ -26,6 +24,7 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -44,12 +43,12 @@
     &quot;assignee&quot;: &quot;PavelDelhomme&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/PavelDelhomme/python_admin-custom.git",
-    "accountId": "462b8cea-2cbd-41e3-9473-a42d0f71ffdc"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/PavelDelhomme/python_admin-custom.git&quot;,
+    &quot;accountId&quot;: &quot;462b8cea-2cbd-41e3-9473-a42d0f71ffdc&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -61,16 +60,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.Run server.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/pavel/PycharmProjects/python_admin-custom/admin_system"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.Run server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pavel/PycharmProjects/python_admin-custom/admin_system&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/admin_system" />

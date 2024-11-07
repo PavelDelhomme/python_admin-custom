@@ -645,6 +645,7 @@ def search_results_view(request):
         if query:
             search = search.query("multi_match", query=query, fields=['username', 'email', 'name'])
 
+    print(f"search results : {search}")
     # Exécuter la recherche et renvoyer les résultats
     results = search.execute()
     context = {

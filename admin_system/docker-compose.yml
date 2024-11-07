@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.ml.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+    mem_limit: 512m
+
+  db:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: adminpavel
+      POSTGRES_PASSWORD: Pavel180400&AdminOvh@QEIHUSR6U9IP
+      POSTGRES_DB: django_db
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adminpavel"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    command: ["bash", "-c", "python manage.py migrate && python manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL || true && python manage.py search_index --rebuild && python manage.py runserver 0.0.0.0:8000"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://adminpavel:Pavel180400&AdminOvh@QEIHUSR6U9IP@db:5433/django_db
+      - ELASTICSEARCH_HOST=http://elasticsearch:9200
+      - DJANGO_SUPERUSER_USERNAME=adminpavel
+      - DJANGO_SUPERUSER_PASSWORD=Pavel180400&AdminOvh@QEIHUSR6U9IP
+      - DJANGO_SUPERUSER_EMAIL=admin@delhomme.ovh
+    depends_on:
+      - db
+      - elasticsearch

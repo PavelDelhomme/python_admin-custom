@@ -101,12 +101,21 @@ WSGI_APPLICATION = 'admin_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
-        'USER': os.getenv('DB_USER', ''),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', ''),
+        #'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'NAME': os.getenv('POSTGRES_DB', 'django_db'),
+        #'USER': os.getenv('DB_USER', ''),
+        'USER': os.getenv('POSTGRES_USER', 'adminpavel'),
+        #'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'Pavel180400&AdminOvh@QEIHUSR6U9IP'),
+        #'HOST': os.getenv('DB_HOST', ''),
+        'HOST': os.getenv('DB_HOST', 'db'),
+        #'PORT': os.getenv('DB_PORT', ''),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'options': '-c search_path=public'
+        }
     }
 }
 
@@ -175,6 +184,7 @@ SIMPLE_JWT = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200'
+        'hosts': os.getenv('ELASTICSEARCH_HOST', 'http://localhost:9200'),
+        'timeout': 20,
     }
 }
