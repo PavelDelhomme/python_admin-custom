@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Modificaiton pour bon fonctionnement des environnement">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/wait_for_elasticsearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/wait_for_elasticsearch.py" afterDir="false" />
-    </list>
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Modification de air for elastic serach normalement bon pour wait for elasticsearch" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -211,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731501632280</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Modification de air for elastic serach normalement bon pour wait for elasticsearch">
+      <option name="closed" value="true" />
+      <created>1731509152558</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1731509152558</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -240,6 +245,7 @@
     <MESSAGE value="ajout des ignore de git et modification" />
     <MESSAGE value="pas de pass" />
     <MESSAGE value="Modificaiton pour bon fonctionnement des environnement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modificaiton pour bon fonctionnement des environnement" />
+    <MESSAGE value="Modification de air for elastic serach normalement bon pour wait for elasticsearch" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modification de air for elastic serach normalement bon pour wait for elasticsearch" />
   </component>
 </project>
