@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="ajout faker env">
-      <change afterPath="$PROJECT_DIR$/admin_system/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/.gitignore" afterDir="false" />
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="pas de pass">
+      <change beforePath="$PROJECT_DIR$/admin_system/.envfaker" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/.envfaker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +179,31 @@
       <option name="project" value="LOCAL" />
       <updated>1731500955020</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ajout des ignore de git">
+      <option name="closed" value="true" />
+      <created>1731501311419</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731501311419</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ajout des ignore de git et modification">
+      <option name="closed" value="true" />
+      <created>1731501346444</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731501346444</updated>
+    </task>
+    <task id="LOCAL-00012" summary="pas de pass">
+      <option name="closed" value="true" />
+      <created>1731501372991</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1731501372991</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,6 +228,9 @@
     <MESSAGE value="Ajout de quelque petite modification dasn lanavigation pour améliorer l'ergonomie bref" />
     <MESSAGE value="Amélioration de l'affichage des utlisateur" />
     <MESSAGE value="ajout faker env" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout faker env" />
+    <MESSAGE value="ajout des ignore de git" />
+    <MESSAGE value="ajout des ignore de git et modification" />
+    <MESSAGE value="pas de pass" />
+    <option name="LAST_COMMIT_MESSAGE" value="pas de pass" />
   </component>
 </project>

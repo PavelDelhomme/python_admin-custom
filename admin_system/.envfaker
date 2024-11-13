@@ -1,2 +1,23 @@
-POSTGRESQL_URL=
+# PostgreSQL (Variables de base de données)
+POSTGRES_USER=fakeuser
+POSTGRES_PASSWORD=fakepassword
+POSTGRES_DB=fakedb
+DB_HOST=admin_postgres
+DB_PORT=5432
 
+# Django Database URL (relié aux informations PostgreSQL)
+DATABASE_URL=postgres://fakeuser:fakepassword@admin_postgres:5432/fakedb
+
+# Elasticsearch
+ELASTICSEARCH_HOST=http://admin_elasticsearch:9200
+
+# Django Superuser Credentials
+DJANGO_SUPERUSER_USERNAME=fakeadmin
+DJANGO_SUPERUSER_PASSWORD=fakepassword
+DJANGO_SUPERUSER_EMAIL=fakeadmin@example.com
+
+# Django Secret Key
+SECRET_KEY=fake-django-secret-key
+
+# Timezone
+TIME_ZONE=UTC

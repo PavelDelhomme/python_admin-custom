@@ -19,14 +19,12 @@ services:
   admin_postgres:
     image: postgres:13
     container_name: admin_postgres
-    environment:
-      POSTGRES_USER: adminpavel
-      POSTGRES_PASSWORD: Pavel180400AdminOvhQEIHUSR6U9IP
-      POSTGRES_DB: django_db
+    env_file:
+      - .env
     ports:
       - "5433:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U adminpavel"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -40,12 +38,8 @@ services:
       - .:/app
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=postgres://adminpavel:Pavel180400AdminOvhQEIHUSR6U9IP@admin_postgres:5432/django_db
-      - ELASTICSEARCH_HOST=http://admin_elasticsearch:9200
-      - DJANGO_SUPERUSER_USERNAME=adminpavel
-      - DJANGO_SUPERUSER_PASSWORD=Pavel180400AdminOvhQEIHUSR6U9IP
-      - DJANGO_SUPERUSER_EMAIL=admin@delhomme.ovh
+    env_file:
+      - .env
     depends_on:
       - admin_postgres
       - admin_elasticsearch
