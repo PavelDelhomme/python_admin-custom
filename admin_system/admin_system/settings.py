@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+
+import dj_database_url
 from django.conf import settings
 from datetime import timedelta
 
@@ -98,7 +100,12 @@ WSGI_APPLICATION = 'admin_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+DATABASE = {
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+}
+print("DATABASE_URL:", os.getenv("DATABASE_URL"))
 
+"""
 DATABASES = {
     'default': {
         #'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
@@ -108,7 +115,7 @@ DATABASES = {
         #'USER': os.getenv('DB_USER', ''),
         'USER': os.getenv('POSTGRES_USER', 'adminpavel'),
         #'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'Pavel180400&AdminOvh@QEIHUSR6U9IP'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'Pavel180400AdminOvhQEIHUSR6U9IP'),
         #'HOST': os.getenv('DB_HOST', ''),
         'HOST': os.getenv('DB_HOST', 'db'),
         #'PORT': os.getenv('DB_PORT', ''),
@@ -118,6 +125,12 @@ DATABASES = {
         }
     }
 }
+"""
+"""
+DATABASES = {
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+}
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

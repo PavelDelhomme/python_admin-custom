@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Amélioration de l'affichage des utlisateur">
-      <change afterPath="$PROJECT_DIR$/admin_system/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_system/requirements.txt" afterDir="false" />
+    <list default="true" id="178f0c73-3018-4241-a964-e2c64cd8451b" name="Changes" comment="Début configuration automatisation avec docker pour utilisation de barre de rechercher avec de meilleure performance">
+      <change afterPath="$PROJECT_DIR$/admin_system/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/create_superuser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_system/wait_for_elasticsearch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_11_2024_10_50__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/documents.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/documents.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_system/admin_core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_system/admin_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/admin_system/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/admin_system/setup_admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_system/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/admin_system/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Python Script" />
         <option value="Dockerfile" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -66,7 +68,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.Run server.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/docker-automatisation&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/pavel/PycharmProjects/python_admin-custom/admin_system&quot;
   }
 }</component>
