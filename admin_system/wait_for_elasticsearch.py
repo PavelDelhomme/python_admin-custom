@@ -1,8 +1,9 @@
 # wait_for_elasticsearch.py
 import time
 import requests
+import os
 
-url = "http://elasticsearch:9200"
+url = os.getenv("ELASTICSEARCH_HOST", "http://admin_elasticsearch:9200")
 
 for _ in range(10):
     try:
